@@ -20,4 +20,8 @@ public class MinMax {
         node.setMinmax(minMaxValue);
         return minMaxValue;
     }
+
+    public static double calculate(DecisionTree tree, int level) {
+        return calculate(tree.getRoot(), level);
+    }
 }

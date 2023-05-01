@@ -10,4 +10,9 @@ public record Field(int row, int column) {
     public Field shiftedTowards(Direction direction) {
         return new Field(row + direction.getRowShift(), column + direction.getColumnShift());
     }
+
+    @Override
+    public String toString() {
+        return "[" + row + ", " + column + "]";
+    }
 }

@@ -1,6 +1,5 @@
 package org.example.move;
 
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.example.Board;
 import org.example.Color;
@@ -12,19 +11,16 @@ import java.util.ArrayList;
 public class MoveGenerator {
     private final Board board;
 
-    public ArrayList<Field> getAvailableMovesOf(Color color) {
-        var availableMoves = new ArrayList<Field>();
-        for (var row = 0; row < 7; row++)
-            for (var column = 0; column < 7; column++) {
-                var field = new Field(row, column);
-                if (isLegalMove(field, color))
-                    availableMoves.add(field);
+    public ArrayList<MoveResult> getAvailableMovesOf(Color color) {
+        var availableMoves = new ArrayList<MoveResult>();
+        for (var row = 0; row < 8; row++)
+            for (var column = 0; column < 8; column++) {
+                var startField = new Field(row, column);
+                var moveResult = performMoveSimulation(startField, color);
+                if (moveResult.isValid())
+                    availableMoves.add(moveResult);
             }
         return availableMoves;
-    }
-
-    private boolean isLegalMove(Field field, Color color) {
-        return performMoveSimulation(field, color).isValid();
     }
 
     private MoveResult performMoveSimulation(Field field, Color color) {
@@ -51,6 +47,6 @@ public class MoveGenerator {
             if (!oppositesOnLine.isEmpty() && metMyColorFieldOnLineEnd)
                 reversedFields.addAll(oppositesOnLine);
         }
-        return new MoveResult(reversedFields);
+        return new MoveResult(reversedFields, field, color);
     }
 }

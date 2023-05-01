@@ -1,6 +1,8 @@
 package org.example;
 
 
+import org.example.move.MoveResult;
+
 import static org.example.Color.BLACK;
 import static org.example.Color.WHITE;
 
@@ -18,13 +20,9 @@ public class Board {
         var result = 0;
         for (var row : board)
             for (var field : row)
-                if (field.equals(color))
+                if (color.equals(field))
                     result++;
         return result;
-    }
-
-    public void setColorAt(Field field, Color color) {
-        board[field.row()][field.column()] = color;
     }
 
     public Color colorAt(Field field) {
@@ -52,5 +50,27 @@ public class Board {
             for (int column = 0; column < 8; column++)
                 result.board[row][column] = this.board[row][column];
         return result;
+    }
+
+    public void applyMove(MoveResult moveResult) {
+        validateMoveBeforeApplying(moveResult);
+        setColorAt(moveResult.startField(), moveResult.movingColor());
+        moveResult.reversedFields().forEach(reversedField -> setColorAt(reversedField, moveResult.movingColor()));
+    }
+
+    private void validateMoveBeforeApplying(MoveResult moveResult) {
+        if (!moveResult.isValid())
+            throw new IllegalArgumentException("Move result must be valid!");
+        if (colorAt(moveResult.startField()) != null)
+            throw new IllegalArgumentException("Start field must be empty!");
+        moveResult.reversedFields().forEach(reversedField -> {
+            if (!colorAt(reversedField).equals(moveResult.movingColor().opposite()))
+                throw new IllegalStateException("One of reversed fields: " + reversedField + " has color: " +
+                        colorAt(reversedField) + ", but it has to be " + moveResult.movingColor().opposite());
+        });
+    }
+
+    private void setColorAt(Field field, Color color) {
+        board[field.row()][field.column()] = color;
     }
 }

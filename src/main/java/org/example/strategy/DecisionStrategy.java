@@ -1,9 +1,9 @@
 package org.example.strategy;
 
-import org.example.Board;
 import org.example.Color;
-import org.example.Field;
+import org.example.move.MoveResult;
 
 public interface DecisionStrategy {
-    Field bestMove(Color movingColor);
+    MoveResult bestMove(Color movingColor);
+    double calculateHeuristics(Color movingColor);
 }

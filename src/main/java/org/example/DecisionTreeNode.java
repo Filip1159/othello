@@ -1,6 +1,5 @@
 package org.example;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -14,6 +13,7 @@ import java.util.List;
 public class DecisionTreeNode {
     @Getter
     private final Color playerColor;
+    @Getter
     private final Board board;
     private final MoveGenerator moveGenerator;
     @Getter
@@ -21,6 +21,8 @@ public class DecisionTreeNode {
     @Getter
     private boolean isLeaf = false;
     private Double rate = null;
+
+    @Getter
     @Setter
     private double minmax = 0;
     private boolean expanded = false;
@@ -35,7 +37,7 @@ public class DecisionTreeNode {
             if (!availableMoves.isEmpty()) {
                 for (var move : availableMoves) {
                     var boardCopy = board.copy();
-                    boardCopy.setColorAt(move, playerColor);
+                    boardCopy.applyMove(move);
                     var child = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy));
                     children.add(child);
                     child.expand(level - 1);

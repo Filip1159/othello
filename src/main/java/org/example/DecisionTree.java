@@ -1,9 +1,13 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.example.move.MoveGenerator;
 
 public class DecisionTree {
-    private final DecisionTreeNode root;
+    @Getter
+    @Setter
+    private DecisionTreeNode root;
 
     public DecisionTree(Board board, Color playerColor) {
         root = new DecisionTreeNode(playerColor, board, new MoveGenerator(board));
@@ -11,5 +15,9 @@ public class DecisionTree {
 
     public void expand(int level) {
         root.expand(level);
+    }
+
+    public boolean isLeaf() {
+        return root.isLeaf();
     }
 }
