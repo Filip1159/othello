@@ -3,14 +3,15 @@ package org.example;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.move.MoveGenerator;
+import org.example.strategy.DecisionStrategy;
 
 public class DecisionTree {
     @Getter
     @Setter
     private DecisionTreeNode root;
 
-    public DecisionTree(Board board, Color playerColor) {
-        root = new DecisionTreeNode(playerColor, board, new MoveGenerator(board));
+    public DecisionTree(Board board, Color startingColor, DecisionStrategy decisionStrategy) {
+        root = new DecisionTreeNode(startingColor, board, new MoveGenerator(board), null, decisionStrategy);
     }
 
     public void expand(int level) {

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.example.move.MoveGenerator;
-import org.example.strategy.GreedyStrategy;
+import org.example.strategy.DecisionStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,11 @@ public class DecisionTreeNode {
     @Getter
     private final List<DecisionTreeNode> children = new ArrayList<>();
     @Getter
+    private final Field moveMade;
+    @Getter
     private boolean isLeaf = false;
     private Double rate = null;
+    private final DecisionStrategy decisionStrategy;
 
     @Getter
     @Setter
@@ -38,7 +41,8 @@ public class DecisionTreeNode {
                 for (var move : availableMoves) {
                     var boardCopy = board.copy();
                     boardCopy.applyMove(move);
-                    var child = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy));
+                    var child = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy),
+                            move.startField(), decisionStrategy);
                     children.add(child);
                     child.expand(level - 1);
                 }
@@ -48,7 +52,8 @@ public class DecisionTreeNode {
                     isLeaf = true;
                 } else {
                     var boardCopy = board.copy();
-                    var node = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy));
+                    var node = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy),
+                            null, decisionStrategy);
                     children.add(node);
                 }
             }
@@ -70,10 +75,16 @@ public class DecisionTreeNode {
                     rate = 0.0;
                 }
             } else {
-                rate = new GreedyStrategy(board).calculateHeuristics(playerColor);
+                rate = decisionStrategy.calculateHeuristics(playerColor);
             }
         }
         return rate;
     }
 
+    public DecisionTreeNode getChildByMoveMade(Field field) {
+        return children.stream()
+                .filter(child -> child.moveMade.equals(field))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No child with such move made exist: " + field));
+    }
 }

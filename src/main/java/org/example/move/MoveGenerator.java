@@ -23,7 +23,7 @@ public class MoveGenerator {
         return availableMoves;
     }
 
-    private MoveResult performMoveSimulation(Field field, Color color) {
+    public MoveResult performMoveSimulation(Field field, Color color) {
         if (board.colorAt(field) != null) {
             return MoveResult.invalid();
         }

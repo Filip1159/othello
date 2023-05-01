@@ -15,4 +15,10 @@ public record Field(int row, int column) {
     public String toString() {
         return "[" + row + ", " + column + "]";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Field otherField)) return false;
+        return otherField.column == column && otherField.row == row;
+    }
 }
