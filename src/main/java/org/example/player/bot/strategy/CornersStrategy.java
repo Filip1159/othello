@@ -14,14 +14,9 @@ public class CornersStrategy implements DecisionStrategy {
             {-3, -4, -1, -1, -1, -1, -4, -3},
             { 4, -3,  2,  2,  2,  2, -3,  4}
     };
-    private final Board board;
-
-    public CornersStrategy(Board board) {
-        this.board = board;
-    }
 
     @Override
-    public double calculateHeuristics(Color movingColor) {
+    public double calculateHeuristics(Board board, Color movingColor) {
         var colorResult = 0;
         var opponentResult = 0;
         for (int row = 0; row < 8; row++)

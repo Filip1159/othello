@@ -75,7 +75,7 @@ public class DecisionTreeNode {
                     rate = -Double.MAX_VALUE;
                 }
             } else {
-                rate = decisionStrategy.calculateHeuristics(moveMadeBy);
+                rate = decisionStrategy.calculateHeuristics(board, moveMadeBy);
             }
         }
         return rate;
