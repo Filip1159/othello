@@ -38,7 +38,6 @@ public class MinMax implements DecisionAlgorithm {
         }
         if (nodesWithBestHeuristics.isEmpty()) throw new IllegalStateException("internal error: cannot select move");
 
-        node.setMinmax(result);
         return new DecisionResult(result, nodesWithBestHeuristics.get(random.nextInt(nodesWithBestHeuristics.size())));
     }
 }

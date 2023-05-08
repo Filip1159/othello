@@ -2,7 +2,6 @@ package org.example;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.example.move.MoveGenerator;
 import org.example.strategy.DecisionStrategy;
 
@@ -26,9 +25,6 @@ public class DecisionTreeNode {
     private Double rate = null;
     private final DecisionStrategy decisionStrategy;
 
-    @Getter
-    @Setter
-    private double minmax = 0;
     private boolean expanded = false;
 
     public void expand(int level) {

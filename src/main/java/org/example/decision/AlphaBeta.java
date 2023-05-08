@@ -15,7 +15,6 @@ public class AlphaBeta implements DecisionAlgorithm {
 
     private DecisionResult calculate(double alpha, double beta, DecisionTreeNode node, int level, boolean isMaximizing) {
         if (node.isLeaf() || level == 0) {
-            node.setMinmax(node.calculateRate());
             return new DecisionResult(node.calculateRate(), null);
         }
 
@@ -34,7 +33,6 @@ public class AlphaBeta implements DecisionAlgorithm {
                     break;
 
             }
-            node.setMinmax(alpha);
             if (nodesWithBestHeuristics.isEmpty()) return new DecisionResult(alpha, null);
             return new DecisionResult(alpha, nodesWithBestHeuristics.get(random.nextInt(nodesWithBestHeuristics.size())));
         } else {  // isMinimizing
@@ -50,7 +48,6 @@ public class AlphaBeta implements DecisionAlgorithm {
                 if (beta <= alpha)
                     break;
             }
-            node.setMinmax(beta);
             if (nodesWithBestHeuristics.isEmpty()) return new DecisionResult(beta, null);
             return new DecisionResult(beta, nodesWithBestHeuristics.get(random.nextInt(nodesWithBestHeuristics.size())));
         }
