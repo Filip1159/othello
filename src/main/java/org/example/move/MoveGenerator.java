@@ -34,7 +34,6 @@ public class MoveGenerator {
             var currentField = field.shiftedTowards(direction);
             var oppositesOnLine = new ArrayList<Field>();
             while (currentField.isInsideBoard() && !metNullField && !metMyColorFieldOnLineEnd) {
-//                System.out.println(currentField);
                 if (color.opposite().equals(board.colorAt(currentField))) {
                     oppositesOnLine.add(currentField);
                     currentField = currentField.shiftedTowards(direction);

@@ -8,11 +8,12 @@ import org.example.strategy.DecisionStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 public class DecisionTreeNode {
     @Getter
-    private final Color playerColor;
+    private final Color moveMadeBy;
     @Getter
     private final Board board;
     private final MoveGenerator moveGenerator;
@@ -33,26 +34,26 @@ public class DecisionTreeNode {
     public void expand(int level) {
         if (level <= 0) return;
 
-        if (!expanded) {
-            var availableMoves = moveGenerator.getAvailableMovesOf(playerColor);
+        if (!expanded || children.isEmpty()) {
+            var availableChildrenMoves = moveGenerator.getAvailableMovesOf(moveMadeBy.opposite());
             expanded = true;
 
-            if (!availableMoves.isEmpty()) {
-                for (var move : availableMoves) {
+            if (!availableChildrenMoves.isEmpty()) {
+                for (var move : availableChildrenMoves) {
                     var boardCopy = board.copy();
                     boardCopy.applyMove(move);
-                    var child = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy),
+                    var child = new DecisionTreeNode(moveMadeBy.opposite(), boardCopy, new MoveGenerator(boardCopy),
                             move.startField(), decisionStrategy);
                     children.add(child);
                     child.expand(level - 1);
                 }
             } else {
-                var opponentMoves = moveGenerator.getAvailableMovesOf(playerColor.opposite());
+                var opponentMoves = moveGenerator.getAvailableMovesOf(moveMadeBy);
                 if (opponentMoves.isEmpty()) {
                     isLeaf = true;
                 } else {
                     var boardCopy = board.copy();
-                    var node = new DecisionTreeNode(playerColor.opposite(), boardCopy, new MoveGenerator(boardCopy),
+                    var node = new DecisionTreeNode(moveMadeBy.opposite(), boardCopy, new MoveGenerator(boardCopy),
                             null, decisionStrategy);
                     children.add(node);
                 }
@@ -66,16 +67,16 @@ public class DecisionTreeNode {
     public double calculateRate() {
         if (rate == null) {
             if (isLeaf) {
-                var playerDisks = board.getNumberOfFieldsOf(playerColor);
-                var opponentDisks = board.getNumberOfFieldsOf(playerColor.opposite());
+                var playerDisks = board.getNumberOfFieldsOf(moveMadeBy);
+                var opponentDisks = board.getNumberOfFieldsOf(moveMadeBy.opposite());
 
                 if (playerDisks > opponentDisks) {
-                    rate = 100.0;
+                    rate = Double.MAX_VALUE;
                 } else {
-                    rate = 0.0;
+                    rate = Double.MIN_VALUE;
                 }
             } else {
-                rate = decisionStrategy.calculateHeuristics(playerColor);
+                rate = decisionStrategy.calculateHeuristics(moveMadeBy);
             }
         }
         return rate;
@@ -83,7 +84,7 @@ public class DecisionTreeNode {
 
     public DecisionTreeNode getChildByMoveMade(Field field) {
         return children.stream()
-                .filter(child -> child.moveMade.equals(field))
+                .filter(child -> Objects.equals(child.moveMade, field))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("No child with such move made exist: " + field));
     }

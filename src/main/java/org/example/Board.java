@@ -29,6 +29,10 @@ public class Board {
         return board[field.row()][field.column()];
     }
 
+    public Color colorAt(int row, int column) {
+        return board[row][column];
+    }
+
     public void print() {
         for (var row = 0; row < 8; row++) {
             for (var column = 0; column < 8; column++) {
@@ -58,6 +62,14 @@ public class Board {
         moveResult.reversedFields().forEach(reversedField -> setColorAt(reversedField, moveResult.movingColor()));
     }
 
+    public int getEmptyFieldsCount() {
+        var result = 0;
+        for (int row = 0; row < 8; row++)
+            for (int column = 0; column < 8; column++)
+                if (board[row][column] == null) result++;
+        return result;
+    }
+
     private void validateMoveBeforeApplying(MoveResult moveResult) {
         if (!moveResult.isValid())
             throw new IllegalArgumentException("Move result must be valid!");
@@ -65,7 +77,7 @@ public class Board {
             throw new IllegalArgumentException("Start field must be empty!");
         moveResult.reversedFields().forEach(reversedField -> {
             if (!colorAt(reversedField).equals(moveResult.movingColor().opposite()))
-                throw new IllegalStateException("One of reversed fields: " + reversedField + " has color: " +
+                throw new IllegalArgumentException("One of reversed fields: " + reversedField + " has color: " +
                         colorAt(reversedField) + ", but it has to be " + moveResult.movingColor().opposite());
         });
     }
