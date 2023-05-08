@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f21fcbbb-3e02-4a08-8799-a27f7ef1bd50" name="Changes" comment="Working AlphaBeta">
+    <list default="true" id="f21fcbbb-3e02-4a08-8799-a27f7ef1bd50" name="Changes" comment="Fix MinMax">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/decision/MinMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/decision/MinMax.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ReversiEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ReversiEngine.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +100,7 @@
       <workItem from="1682979841681" duration="2159000" />
       <workItem from="1683367806314" duration="19000" />
       <workItem from="1683368204156" duration="19000" />
-      <workItem from="1683537205357" duration="10782000" />
+      <workItem from="1683537205357" duration="12669000" />
     </task>
     <task id="LOCAL-00001" summary="Working game logic">
       <created>1682890864612</created>
@@ -136,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683563797921</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix MinMax">
+      <created>1683564577089</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683564577089</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,7 +167,8 @@
     <MESSAGE value="Cleanup code, ai vs ai still works" />
     <MESSAGE value="Fix MinMax best child search" />
     <MESSAGE value="Working AlphaBeta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working AlphaBeta" />
+    <MESSAGE value="Fix MinMax" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix MinMax" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

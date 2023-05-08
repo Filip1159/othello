@@ -1,11 +1,12 @@
 package org.example.player;
 
 import lombok.Getter;
-import org.example.*;
+import org.example.Color;
+import org.example.DecisionTree;
+import org.example.Field;
+import org.example.ReversiEngine;
 import org.example.decision.DecisionAlgorithm;
 import org.example.strategy.DecisionStrategy;
-
-import static org.example.Color.BLACK;
 
 public class BotPlayer extends AbstractPlayer {
     @Getter
@@ -14,11 +15,11 @@ public class BotPlayer extends AbstractPlayer {
     private final int expansionDepth;
 
     public BotPlayer(Color color, DecisionStrategy strategy, DecisionAlgorithm decisionAlgorithm,
-                     Board board, int expansionDepth) {
+                     ReversiEngine engine, int expansionDepth) {
         super(color);
         this.expansionDepth = expansionDepth;
         this.decisionAlgorithm = decisionAlgorithm;
-        decisionTree = new DecisionTree(board, BLACK, strategy);
+        decisionTree = new DecisionTree(engine, strategy);
         decisionTree.expand(expansionDepth);
     }
 

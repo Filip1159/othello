@@ -10,9 +10,9 @@ public class DecisionTree {
     @Setter
     private DecisionTreeNode root;
 
-    public DecisionTree(Board board, Color startingColor, DecisionStrategy decisionStrategy) {
-        root = new DecisionTreeNode(startingColor.opposite(), board, new MoveGenerator(board), null,
-                decisionStrategy);
+    public DecisionTree(ReversiEngine engine, DecisionStrategy decisionStrategy) {
+        root = new DecisionTreeNode(engine.getStartingColor().opposite(), engine.getBoard(),
+                new MoveGenerator(engine.getBoard()), null, decisionStrategy);
         // opposite, because I want children to be of startingColor as it is the first move made
     }
 
