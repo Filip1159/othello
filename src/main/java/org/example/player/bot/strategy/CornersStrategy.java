@@ -1,7 +1,7 @@
-package org.example.strategy;
+package org.example.player.bot.strategy;
 
-import org.example.Board;
-import org.example.Color;
+import org.example.engine.Board;
+import org.example.engine.Color;
 
 public class CornersStrategy implements DecisionStrategy {
     private static final int[][] fieldWeights = new int[][]{

@@ -1,11 +1,11 @@
-package org.example;
+package org.example.engine;
 
 import lombok.Getter;
 import org.example.move.MoveGenerator;
 import org.example.player.AbstractPlayer;
 
-import static org.example.Color.BLACK;
-import static org.example.Color.WHITE;
+import static org.example.engine.Color.BLACK;
+import static org.example.engine.Color.WHITE;
 
 public class ReversiEngine {
     @Getter

@@ -1,9 +1,10 @@
-package org.example;
+package org.example.player.bot;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.engine.ReversiEngine;
 import org.example.move.MoveGenerator;
-import org.example.strategy.DecisionStrategy;
+import org.example.player.bot.strategy.DecisionStrategy;
 
 public class DecisionTree {
     @Getter

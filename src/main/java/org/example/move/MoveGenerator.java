@@ -1,9 +1,9 @@
 package org.example.move;
 
 import lombok.RequiredArgsConstructor;
-import org.example.Board;
-import org.example.Color;
-import org.example.Field;
+import org.example.engine.Board;
+import org.example.engine.Color;
+import org.example.engine.Field;
 
 import java.util.ArrayList;
 

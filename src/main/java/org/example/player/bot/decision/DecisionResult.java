@@ -1,6 +1,6 @@
-package org.example.decision;
+package org.example.player.bot.decision;
 
-import org.example.DecisionTreeNode;
+import org.example.player.bot.DecisionTreeNode;
 
 public record DecisionResult(
         double heuristicsValue,

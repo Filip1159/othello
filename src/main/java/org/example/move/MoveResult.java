@@ -1,7 +1,7 @@
 package org.example.move;
 
-import org.example.Color;
-import org.example.Field;
+import org.example.engine.Color;
+import org.example.engine.Field;
 
 import java.util.List;
 

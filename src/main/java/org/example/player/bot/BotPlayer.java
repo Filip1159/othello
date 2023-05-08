@@ -1,12 +1,12 @@
-package org.example.player;
+package org.example.player.bot;
 
 import lombok.Getter;
-import org.example.Color;
-import org.example.DecisionTree;
-import org.example.Field;
-import org.example.ReversiEngine;
-import org.example.decision.DecisionAlgorithm;
-import org.example.strategy.DecisionStrategy;
+import org.example.engine.Color;
+import org.example.engine.Field;
+import org.example.engine.ReversiEngine;
+import org.example.player.bot.decision.DecisionAlgorithm;
+import org.example.player.AbstractPlayer;
+import org.example.player.bot.strategy.DecisionStrategy;
 
 public class BotPlayer extends AbstractPlayer {
     @Getter

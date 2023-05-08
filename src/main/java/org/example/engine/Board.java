@@ -1,10 +1,10 @@
-package org.example;
+package org.example.engine;
 
 
 import org.example.move.MoveResult;
 
-import static org.example.Color.BLACK;
-import static org.example.Color.WHITE;
+import static org.example.engine.Color.BLACK;
+import static org.example.engine.Color.WHITE;
 
 public class Board {
     private final Color[][] board = new Color[8][8];

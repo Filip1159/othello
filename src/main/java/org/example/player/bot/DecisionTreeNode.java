@@ -1,9 +1,12 @@
-package org.example;
+package org.example.player.bot;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.example.engine.Board;
+import org.example.engine.Color;
+import org.example.engine.Field;
 import org.example.move.MoveGenerator;
-import org.example.strategy.DecisionStrategy;
+import org.example.player.bot.strategy.DecisionStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

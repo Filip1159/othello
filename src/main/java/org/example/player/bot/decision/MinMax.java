@@ -1,7 +1,7 @@
-package org.example.decision;
+package org.example.player.bot.decision;
 
-import org.example.DecisionTree;
-import org.example.DecisionTreeNode;
+import org.example.player.bot.DecisionTree;
+import org.example.player.bot.DecisionTreeNode;
 
 import java.util.ArrayList;
 import java.util.Random;
