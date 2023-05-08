@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f21fcbbb-3e02-4a08-8799-a27f7ef1bd50" name="Changes" comment="Fix MinMax">
+    <list default="true" id="f21fcbbb-3e02-4a08-8799-a27f7ef1bd50" name="Changes" comment="Make startingPlayer adjustable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DecisionTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DecisionTreeNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ReversiEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ReversiEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/decision/AlphaBeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/decision/AlphaBeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/decision/MinMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/decision/MinMax.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +104,7 @@
       <workItem from="1683367806314" duration="19000" />
       <workItem from="1683368204156" duration="19000" />
       <workItem from="1683537205357" duration="12669000" />
+      <workItem from="1683566999658" duration="3661000" />
     </task>
     <task id="LOCAL-00001" summary="Working game logic">
       <created>1682890864612</created>
@@ -144,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683564577089</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Make startingPlayer adjustable">
+      <created>1683568066660</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683568066660</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,7 +179,8 @@
     <MESSAGE value="Fix MinMax best child search" />
     <MESSAGE value="Working AlphaBeta" />
     <MESSAGE value="Fix MinMax" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix MinMax" />
+    <MESSAGE value="Make startingPlayer adjustable" />
+    <option name="LAST_COMMIT_MESSAGE" value="Make startingPlayer adjustable" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

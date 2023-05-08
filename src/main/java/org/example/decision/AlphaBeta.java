@@ -2,50 +2,57 @@ package org.example.decision;
 
 import org.example.DecisionTree;
 import org.example.DecisionTreeNode;
-import org.example.ReversiEngine;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class AlphaBeta implements DecisionAlgorithm {
+    private final Random random = new Random();
 
     public DecisionResult calculate(DecisionTree tree, int level) {
-        return calculate(-Double.MAX_VALUE, Double.MAX_VALUE, tree.getRoot(), level);
+        return calculate(-Double.MAX_VALUE, Double.MAX_VALUE, tree.getRoot(), level, true);
     }
 
-    private DecisionResult calculate(double alpha, double beta, DecisionTreeNode node, int level) {
+    private DecisionResult calculate(double alpha, double beta, DecisionTreeNode node, int level, boolean isMaximizing) {
         if (node.isLeaf() || level == 0) {
             node.setMinmax(node.calculateRate());
             return new DecisionResult(node.calculateRate(), null);
         }
 
-        var isMaximizing = node.getMoveMadeBy().opposite().equals(ReversiEngine.movingColor);
-
-        DecisionTreeNode resultNode = null;
+        var nodesWithBestHeuristics = new ArrayList<DecisionTreeNode>();
         if (isMaximizing) {
             for (var child : node.getChildren()) {
-                var childResult = calculate(alpha, beta, child, level - 1);
-                if (alpha <= childResult.heuristicsValue()) {
+                var childResult = calculate(alpha, beta, child, level - 1, false);
+                if (alpha == childResult.heuristicsValue()) {
+                    nodesWithBestHeuristics.add(child);
+                } else if (alpha < childResult.heuristicsValue()) {
                     alpha = childResult.heuristicsValue();
-                    resultNode = child;
+                    nodesWithBestHeuristics.clear();
+                    nodesWithBestHeuristics.add(child);
                 }
                 if (beta <= alpha)
                     break;
 
             }
             node.setMinmax(alpha);
-            return new DecisionResult(alpha, resultNode);
-        }
-
-        else {  // isMinimizing
+            if (nodesWithBestHeuristics.isEmpty()) return new DecisionResult(alpha, null);
+            return new DecisionResult(alpha, nodesWithBestHeuristics.get(random.nextInt(nodesWithBestHeuristics.size())));
+        } else {  // isMinimizing
             for (var child : node.getChildren()) {
-                var childResult = calculate(alpha, beta, child, level - 1);
-                if (beta >= childResult.heuristicsValue()) {
+                var childResult = calculate(alpha, beta, child, level - 1, true);
+                if (beta == childResult.heuristicsValue()) {
+                    nodesWithBestHeuristics.add(child);
+                } else if (beta > childResult.heuristicsValue()) {
                     beta = childResult.heuristicsValue();
-                    resultNode = child;
+                    nodesWithBestHeuristics.clear();
+                    nodesWithBestHeuristics.add(child);
                 }
                 if (beta <= alpha)
                     break;
             }
             node.setMinmax(beta);
-            return new DecisionResult(beta, resultNode);
+            if (nodesWithBestHeuristics.isEmpty()) return new DecisionResult(beta, null);
+            return new DecisionResult(beta, nodesWithBestHeuristics.get(random.nextInt(nodesWithBestHeuristics.size())));
         }
     }
 }

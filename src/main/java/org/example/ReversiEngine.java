@@ -46,7 +46,7 @@ public class ReversiEngine {
         board.print();
 
         movingColor = startingColor;
-        while (true) {
+        while (!isGameFinished()) {
             System.out.println("================= " + movingColor + " tour ==================");
             var movingPlayer = getMovingPlayer();
             var opponentOfMovingPlayer = getOpponentOfMovingPlayer();
@@ -66,29 +66,6 @@ public class ReversiEngine {
                 System.out.println(movingColor + " has no available moves");
             }
             movingColor = movingColor.opposite();
-
-            if (isGameFinished()) break;
-
-            // player 2
-//            System.out.println("================ WHITE tour ===================");
-//            movingColor = WHITE;
-//            if (!moveGenerator.getAvailableMovesOf(WHITE).isEmpty()) {
-//                var whitePlayerMove = whitePlayer.makeMove();
-//                var whiteMoveResult = moveGenerator.performMoveSimulation(whitePlayerMove, WHITE);
-//
-//                board.applyMove(whiteMoveResult);
-//                blackPlayer.onOpponentMoveMade(whitePlayerMove);
-//
-//                System.out.println("WHITE makes move: " + whitePlayerMove);
-//                board.print();
-//                System.out.println();
-//            } else {
-//                whitePlayer.makeMove();
-//                blackPlayer.onOpponentMoveMade(null);
-//                System.out.println("WHITE has no available moves");
-//            }
-//
-//            if (isGameFinished()) break;
         }
 
         board.print();

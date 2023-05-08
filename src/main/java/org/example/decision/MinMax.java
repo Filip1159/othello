@@ -2,37 +2,43 @@ package org.example.decision;
 
 import org.example.DecisionTree;
 import org.example.DecisionTreeNode;
-import org.example.ReversiEngine;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class MinMax implements DecisionAlgorithm {
+    private final Random random = new Random();
 
     public DecisionResult calculate(DecisionTree tree, int level) {
-        return calculate(tree.getRoot(), level);
+        return calculate(tree.getRoot(), level, true);
     }
 
-    private DecisionResult calculate(DecisionTreeNode node, int level) {
+    private DecisionResult calculate(DecisionTreeNode node, int level, boolean isMaximizing) {
         if (node.isLeaf() || level == 0 || node.getChildren().isEmpty()) {
             return new DecisionResult(node.calculateRate(), null);
         }
 
-        var isMaximizing = node.getMoveMadeBy().opposite().equals(ReversiEngine.movingColor);
         var isMinimizing = !isMaximizing;
 
         var result = isMaximizing ? -Double.MAX_VALUE : Double.MAX_VALUE;
-        DecisionTreeNode resultNode = null;
+        var nodesWithBestHeuristics = new ArrayList<DecisionTreeNode>();
         for (var child : node.getChildren()) {
-            var minMaxResult = calculate(child, level - 1);
-            if (isMaximizing && result <= minMaxResult.heuristicsValue()) {
+            var minMaxResult = calculate(child, level - 1, !isMaximizing);
+            if (result == minMaxResult.heuristicsValue()) {
+                nodesWithBestHeuristics.add(child);
+            } else if (isMaximizing && result < minMaxResult.heuristicsValue()) {
                 result = minMaxResult.heuristicsValue();
-                resultNode = child;
-            } else if (isMinimizing && result >= minMaxResult.heuristicsValue()) {
+                nodesWithBestHeuristics.clear();
+                nodesWithBestHeuristics.add(child);
+            } else if (isMinimizing && result > minMaxResult.heuristicsValue()) {
                 result = minMaxResult.heuristicsValue();
-                resultNode = child;
+                nodesWithBestHeuristics.clear();
+                nodesWithBestHeuristics.add(child);
             }
         }
-        if (resultNode == null) throw new IllegalStateException("result node cannot be null, movingColor = " + ReversiEngine.movingColor + ", result = " + result);
+        if (nodesWithBestHeuristics.isEmpty()) throw new IllegalStateException("internal error: cannot select move");
 
         node.setMinmax(result);
-        return new DecisionResult(result, resultNode);
+        return new DecisionResult(result, nodesWithBestHeuristics.get(random.nextInt(nodesWithBestHeuristics.size())));
     }
 }

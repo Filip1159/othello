@@ -73,7 +73,7 @@ public class DecisionTreeNode {
                 if (playerDisks > opponentDisks) {
                     rate = Double.MAX_VALUE;
                 } else {
-                    rate = Double.MIN_VALUE;
+                    rate = -Double.MAX_VALUE;
                 }
             } else {
                 rate = decisionStrategy.calculateHeuristics(moveMadeBy);
