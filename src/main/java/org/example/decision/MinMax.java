@@ -11,7 +11,7 @@ public class MinMax implements DecisionAlgorithm {
     }
 
     private DecisionResult calculate(DecisionTreeNode node, int level) {
-        if (node.isLeaf() || level == 0) {
+        if (node.isLeaf() || level == 0 || node.getChildren().isEmpty()) {
             return new DecisionResult(node.calculateRate(), null);
         }
 
